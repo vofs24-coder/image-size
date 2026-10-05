@@ -153,6 +153,67 @@
         footer a:hover {
             color: #ffffff;
         }
+
+        .site-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0 28px;
+}
+
+.menu-wrap {
+    position: relative;
+}
+
+.menu-button {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #aeb7c4;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.menu-button:hover {
+    color: #ffffff;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 44px;
+    right: 0;
+    width: 190px;
+    padding: 7px;
+    background: #0b0f17;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.35);
+    z-index: 100;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 12px;
+    color: #aeb7c4;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+.dropdown-menu a:hover {
+    color: #ffffff;
+    background: rgba(255,255,255,.05);
+                }
+        
     </style>
 </head>
 
@@ -160,10 +221,25 @@
 
 <div class="page">
 
-    <header>
-        <a class="logo" href="index.html">Image Size</a>
+    <header class="site-header">
 
-        <a class="menu" href="index.html" aria-label="Back to Image Size">⋮</a>
+    <a class="logo" href="index.html">Image Size</a>
+
+    <div class="menu-wrap">
+
+        <button class="menu-button" type="button" onclick="toggleMenu()" aria-label="Open menu">
+            ⋮
+        </button>
+
+        <nav class="dropdown-menu" id="siteMenu">
+            <a href="index.html">Resize Image</a>
+            <a href="about.html">About</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
+        </nav>
+
+    </div>
+
     </header>
 
     <main class="card">
