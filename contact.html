@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us - Image Size</title>
+    <meta name="description" content="Contact Image Size with questions, suggestions or feedback.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #070a10;
+            color: #f1f4f8;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+        }
+
+        .page {
+            width: min(100% - 28px, 760px);
+            margin: 0 auto;
+            padding: 24px 0 40px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0 28px;
+        }
+
+        .logo {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -.4px;
+        }
+
+        .menu {
+            color: #aeb7c4;
+            text-decoration: none;
+            font-size: 26px;
+            line-height: 1;
+        }
+
+        .card {
+            background: #0b0f17;
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 16px;
+            padding: 26px 22px;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: 30px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            margin: 28px 0 10px;
+            font-size: 19px;
+        }
+
+        p {
+            margin: 0 0 20px;
+            color: #aeb7c4;
+            font-size: 15px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        label {
+            color: #dce2e9;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            margin-top: 7px;
+            padding: 13px 14px;
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 10px;
+            background: #070a10;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #d4a854;
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: 0;
+            border-radius: 10px;
+            background: #d4a854;
+            color: #070a10;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: .9;
+        }
+
+        .email-note {
+            margin-top: 18px;
+            font-size: 13px;
+            color: #727d8c;
+        }
+
+        .email-note a {
+            color: #d4a854;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 18px 10px;
+            border-top: 1px solid rgba(255,255,255,.07);
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        footer a {
+            color: #8d96a5;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <header>
+        <a class="logo" href="index.html">Image Size</a>
+
+        <a class="menu" href="index.html" aria-label="Back to Image Size">⋮</a>
+    </header>
+
+    <main class="card">
+
+        <h1>Contact Us</h1>
+
+        <p>
+            Have a question, suggestion or found a problem with Image Size?
+            Send us a message using the form below.
+        </p>
+
+        <form class="contact-form" id="contactForm">
+
+            <label>
+                Your Name
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Your name"
+                    required>
+            </label>
+
+            <label>
+                Your Email
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="you@example.com"
+                    required>
+            </label>
+
+            <label>
+                Subject
+                <input
+                    type="text"
+                    id="subject"
+                    placeholder="What is your message about?"
+                    required>
+            </label>
+
+            <label>
+                Message
+                <textarea
+                    id="message"
+                    placeholder="Write your message..."
+                    required></textarea>
+            </label>
+
+            <button type="submit">
+                Send Message
+            </button>
+
+        </form>
+
+        <p class="email-note">
+            You can also contact us directly at
+            <a href="mailto:vofs24@gmail.com">vofs24@gmail.com</a>.
+        </p>
+
+    </main>
+
+    <footer>
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+    </footer>
+
+</div>
+
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const subject = document.getElementById("subject").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        const body =
+            "Name: " + name + "\n" +
+            "Email: " + email + "\n\n" +
+            message;
+
+        const mailto =
+            "mailto:vofs24@gmail.com" +
+            "?subject=" + encodeURIComponent(subject) +
+            "&body=" + encodeURIComponent(body);
+
+        window.location.href = mailto;
+    });
+</script>
+
+</body>
+  </html>
