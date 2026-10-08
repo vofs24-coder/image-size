@@ -1,0 +1,1766 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Free image resizer online. Resize JPG, PNG, and WebP images to exact pixel dimensions directly in your browser, without uploading them to a server.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://myimgsize.pages.dev/">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+
+<title>Resize Image Online Free</title>
+
+<style>
+:root{
+  --bg:#0F141A;
+  --c1:#1B2535;
+  --c2:#151C28;
+  --ln:#2A3547;
+  --mut:#8A94A3;
+  --bl:#4A90F0;
+  --am:#F5B14A;
+  --gr:#2FCC71;
+  --rd:#E5513F;
+  --pu:#7C6CF0;
+}
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+[hidden]{
+  display:none!important;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:var(--bg);
+}
+
+body{
+  color:#fff;
+  font:15px/1.35 Roboto,system-ui,-apple-system,"Segoe UI",sans-serif;
+  touch-action:manipulation;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  color:inherit;
+  cursor:pointer;
+  border:0;
+}
+
+svg{
+  width:22px;
+  height:22px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  flex:none;
+}
+
+/* =========================
+   GLOBAL LAYOUT
+========================= */
+
+.screen{
+  width:min(100% - 28px,760px);
+  margin:0 auto;
+}
+
+/* =========================
+   HOME
+========================= */
+
+#home{
+  min-height:100dvh;
+  padding:18px 0 30px;
+}
+
+.home-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  min-height:42px;
+}
+
+.home-title{
+  min-width:0;
+}
+
+h1{
+  font-size:clamp(25px,5vw,32px);
+  line-height:1.1;
+  margin:0 0 5px;
+}
+
+.sub{
+  color:var(--mut);
+  margin:0 0 18px;
+  max-width:650px;
+}
+
+/* =========================
+   THREE DOT MENU
+========================= */
+
+.menu-wrap{
+  position:relative;
+  flex:none;
+}
+
+.menu-btn{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:#1B2431;
+  border:1px solid var(--ln);
+  color:#C9D1DC;
+}
+
+.menu-btn:active{
+  filter:brightness(1.25);
+}
+
+.menu-btn svg{
+  width:21px;
+  height:21px;
+}
+
+.menu{
+  position:absolute;
+  z-index:30;
+  right:0;
+  top:48px;
+  width:190px;
+  padding:6px;
+  border:1px solid var(--ln);
+  border-radius:14px;
+  background:#151C28;
+  box-shadow:0 16px 40px rgba(0,0,0,.45);
+}
+
+.menu a{
+  display:block;
+  padding:11px 12px;
+  border-radius:9px;
+  color:#D9E0E9;
+  text-decoration:none;
+}
+
+.menu a:hover,
+.menu a:active{
+  background:#202B3B;
+}
+
+/* =========================
+   UPLOAD
+========================= */
+
+.up{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  min-height:150px;
+  padding:22px 14px;
+  border:2px dashed var(--bl);
+  border-radius:16px;
+  background:linear-gradient(var(--c1),var(--c2));
+  color:var(--bl);
+  cursor:pointer;
+  text-align:center;
+}
+
+.up svg{
+  width:34px;
+  height:34px;
+  margin-bottom:2px;
+}
+
+.up b{
+  font-size:17px;
+}
+
+.up small{
+  color:var(--mut);
+}
+
+.or{
+  text-align:center;
+  color:var(--mut);
+  margin:11px 0;
+}
+
+.sample{
+  display:block;
+  width:100%;
+  padding:8px;
+  border-radius:16px;
+  background:linear-gradient(var(--c1),var(--c2));
+  border:1px solid var(--ln);
+  text-align:center;
+}
+
+.sample img{
+  display:block;
+  width:100%;
+  max-height:38vh;
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:8px;
+}
+
+.sample span{
+  font-weight:700;
+  color:var(--am);
+}
+
+/* =========================
+   LOCAL PROCESSING NOTICE
+========================= */
+
+.local-note{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  margin:13px 0 0;
+  color:var(--mut);
+  font-size:12px;
+  text-align:center;
+    }
+
+.local-note svg{
+  width:17px;
+  height:17px;
+  color:var(--gr);
+}
+
+/* =========================
+   AD SPACE
+========================= */
+    
+
+.ad-slot{
+  width:100%;
+  min-height:50px;
+  margin:16px 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  color:#566171;
+  font-size:10px;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+.ad-slot:empty::before{
+  content:"Advertisement";
+}
+
+/*
+  Later, place the AdSense code inside .ad-slot.
+  The placeholder remains visually subtle until then.
+*/
+
+/* =========================
+   EDITOR
+========================= */
+
+#ed{
+  min-height:100dvh;
+  padding:10px 0 18px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.editor-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  min-height:38px;
+}
+
+.editor-title{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  min-width:0;
+}
+
+.editor-title h2{
+  font-size:18px;
+  margin:0;
+}
+
+.bk{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  background:none;
+  padding:4px;
+  margin-left:-4px;
+}
+
+.preview-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+
+.swap-btn{
+  flex:0 0 auto;
+  border:1px solid var(--ln);
+  background:var(--c1);
+  color:var(--tx);
+  border-radius:10px;
+  padding:8px 11px;
+  font:inherit;
+  font-size:13px;
+  line-height:1;
+  cursor:pointer;
+}
+
+.swap-btn:hover{
+  border-color:var(--accent);
+}
+
+/* =========================
+   CARDS / PREVIEW
+========================= */
+
+.card{
+  border-radius:16px;
+  border:1px solid var(--ln);
+  background:linear-gradient(var(--c1),var(--c2));
+}
+
+.prev{
+  flex:1 1 auto;
+  min-height:150px;
+  max-height:48dvh;
+  padding:8px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  position:relative;
+}
+
+.prev img{
+  flex:1 1 auto;
+  min-height:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:8px;
+}
+
+.prev small{
+  text-align:center;
+  color:var(--mut);
+  font-size:12px;
+}
+
+.prev.res{
+  border-color:var(--gr);
+}
+
+.prev.res small{
+  color:var(--gr);
+  font-weight:700;
+}
+
+/* =========================
+   DIMENSION FIELDS
+========================= */
+
+.fields{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.fld{
+  flex:1;
+  border:2px solid var(--ln);
+  border-radius:14px;
+  padding:5px 10px;
+  background:linear-gradient(var(--c1),var(--c2));
+  min-width:0;
+  cursor:pointer;
+}
+
+.fld.on{
+  border-color:#8FA3C7;
+}
+
+.fld span{
+  font-size:12px;
+  font-weight:700;
+}
+
+.fld.w span{
+  color:var(--bl);
+}
+
+.fld.h span{
+  color:var(--am);
+}
+
+.fld b{
+  display:block;
+  font-size:clamp(21px,5vw,24px);
+  line-height:30px;
+  height:30px;
+  overflow:hidden;
+  white-space:nowrap;
+}
+
+.fld b:empty::before{
+  content:attr(data-ph);
+  color:#4D596B;
+}
+
+.fld.on b::after{
+  content:"";
+  display:inline-block;
+  width:2px;
+  height:22px;
+  background:var(--bl);
+  margin-left:2px;
+  vertical-align:-4px;
+  animation:bl 1s steps(1) infinite;
+}
+
+.fld.h.on b::after{
+  background:var(--am);
+}
+
+@keyframes bl{
+  50%{opacity:0}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .fld.on b::after{
+    animation:none;
+  }
+}
+
+#lk{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#1E2430;
+  border:2px solid var(--ln);
+  color:var(--mut);
+  display:grid;
+  place-items:center;
+  flex:none;
+}
+
+#lk[aria-pressed=true]{
+  background:var(--pu);
+  border-color:var(--pu);
+  color:#fff;
+}
+
+#lk[aria-pressed=true] .o,
+#lk[aria-pressed=false] .c{
+  display:none;
+}
+
+/* =========================
+   INFO
+========================= */
+
+.info{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:#000;
+  border:2px solid var(--ln);
+  border-radius:14px;
+  padding:7px 14px;
+}
+
+.info span{
+  font-size:13px;
+  font-weight:700;
+  color:var(--mut);
+}
+
+.info b{
+  color:var(--gr);
+  font-size:18px;
+  white-space:nowrap;
+}
+
+/* =========================
+   KEYPAD
+========================= */
+
+.pad{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:6px;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+.k{
+  height:44px;
+  border-radius:12px;
+  font-size:22px;
+  font-weight:700;
+  background:linear-gradient(#3A4049,#2A2F37);
+  display:grid;
+  place-items:center;
+}
+
+.k:active{
+  filter:brightness(1.3);
+}
+
+.k.z{
+  grid-column:span 2;
+}
+
+.k.s{
+  background:#161B23;
+  border:1px solid var(--ln);
+}
+
+.k.bs{
+  color:var(--bl);
+}
+
+.k.clr{
+  color:var(--rd);
+}
+
+.k.sw{
+  color:var(--pu);
+}
+
+.go{
+  grid-column:span 2;
+  height:44px;
+  border-radius:12px;
+  background:var(--gr);
+  color:#06240F;
+  font-size:17px;
+  font-weight:800;
+}
+
+.go:disabled{
+  background:#26303B;
+  color:#5D6878;
+}
+
+/* =========================
+   RESULTS
+========================= */
+
+#res{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.fm{
+  display:flex;
+  gap:6px;
+}
+
+.fm button{
+  flex:1;
+  height:38px;
+  border-radius:10px;
+  background:#222934;
+  border:2px solid var(--ln);
+  font-weight:700;
+}
+
+.fm button.on{
+  border-color:var(--gr);
+  color:var(--gr);
+}
+
+.ac,
+.sec{
+  display:flex;
+  gap:6px;
+}
+
+.ac .btn{
+  flex:1;
+  height:44px;
+  border-radius:12px;
+  background:var(--gr);
+  color:#06240F;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  text-decoration:none;
+}
+
+.ac .btn.alt{
+  background:transparent;
+  color:var(--gr);
+  border:2px solid var(--gr);
+}
+
+.sec button{
+  flex:1;
+  height:38px;
+  border-radius:10px;
+  background:transparent;
+  border:2px solid var(--ln);
+  color:#C9D1DC;
+  font-weight:600;
+}
+
+.hint{
+  font-size:12px;
+  color:var(--mut);
+  margin:0;
+  text-align:center;
+}
+
+.ac .btn.off{
+  opacity:.45;
+  pointer-events:none;
+}
+
+/* =========================
+   TABLET / DESKTOP
+========================= */
+
+@media(min-width:600px){
+
+  #home{
+    padding-top:30px;
+  }
+
+  .up{
+    min-height:175px;
+  }
+
+  .sample{
+    max-width:700px;
+    margin:auto;
+  }
+
+  .sample img{
+    max-height:360px;
+  }
+
+  #ed{
+    padding-top:16px;
+  }
+
+  .prev{
+    min-height:250px;
+    max-height:52dvh;
+  }
+
+  .pad{
+    max-width:600px;
+    width:100%;
+    margin:0 auto;
+  }
+
+  .info,
+  .fields,
+  #res{
+    max-width:600px;
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .editor-head{
+    max-width:600px;
+    width:100%;
+    margin:auto;
+  }
+}
+
+@media(min-width:900px){
+
+  .screen{
+    width:min(100% - 48px,780px);
+  }
+
+  #home{
+    padding-top:42px;
+  }
+
+  .prev{
+    max-height:54dvh;
+  }
+
+  .ad-slot{
+    margin:20px 0;
+  }
+}
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media(max-width:360px){
+
+  .preview-wrap{
+    gap:7px;
+  }
+
+  .swap-btn{
+    padding:7px 9px;
+    font-size:12px;
+  }
+
+}
+
+@media(max-height:650px){
+
+  #home{
+    padding-top:12px;
+  }
+
+  .up{
+    min-height:115px;
+    padding:14px;
+  }
+
+  .up svg{
+    width:28px;
+    height:28px;
+  }
+
+  .sample img{
+    max-height:24vh;
+  }
+
+  #ed{
+    gap:6px;
+  }
+
+  .prev{
+    min-height:90px;
+    max-height:32dvh;
+  }
+
+  .k{
+    height:40px;
+  }
+
+  .go{
+    height:40px;
+  }
+
+  .ad-slot{
+    margin:7px 0;
+  }
+}
+
+.site-footer {
+    width: 100%;
+    max-width: 760px;
+    margin: 35px auto 20px;
+    padding: 18px 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,.07);
+}
+
+.site-footer a {
+    color: #8d96a5;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color .2s ease;
+}
+
+.site-footer a:hover {
+    color: #ffffff;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HOME
+========================= -->
+
+<div id="home" class="screen">
+
+  <div class="home-head">
+
+    <div class="home-title">
+      <h1>Resize Image</h1>
+    </div>
+
+    <div class="menu-wrap">
+      <button id="homeMenuBtn"
+              class="menu-btn"
+              aria-label="Open menu"
+              aria-expanded="false">
+        <svg viewBox="0 0 24 24">
+          <circle cx="5" cy="12" r="1"/>
+          <circle cx="12" cy="12" r="1"/>
+          <circle cx="19" cy="12" r="1"/>
+        </svg>
+      </button>
+
+      <nav id="homeMenu" class="menu" hidden>
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+
+  </div>
+
+  <p class="sub">
+    Change your image size in pixels, right on your phone.
+    Nothing is uploaded to a server.
+  </p>
+
+  <label class="up" for="f">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 16V4M8 8l4-4 4 4M5 14v6h14v-6"/>
+    </svg>
+    <b>Upload image</b>
+    <small>JPG, PNG, or WebP</small>
+  </label>
+
+  <input id="f" type="file" accept="image/*" hidden>
+
+  <p class="or">or</p>
+
+  <button id="ex" class="sample">
+    <img id="exi" alt="Example image">
+    <span>Edit this example</span>
+  </button>
+
+  <div class="ad-slot" aria-label="Advertisement"><script>atOptions = {'key' : 'e95f3b10572d4b4ab858115b2aa5b2ee','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/e95f3b10572d4b4ab858115b2aa5b2ee/invoke.js"></script></div>
+
+  <div class="local-note">
+    <svg viewBox="0 0 24 24">
+      <rect x="5" y="11" width="14" height="9" rx="2"/>
+      <path d="M8 11V8a4 4 0 018 0v3"/>
+    </svg>
+    <span>Your image stays on your device.</span>
+  </div>
+
+</div>
+
+
+<!-- =========================
+     EDITOR
+========================= -->
+
+<div id="ed" class="screen" hidden>
+
+  <div class="editor-head">
+
+    <div class="editor-title">
+      <button id="bk" class="bk" aria-label="Back">
+        <svg viewBox="0 0 24 24">
+          <path d="M15 5l-7 7 7 7"/>
+        </svg>
+      </button>
+
+      <h2>Resize</h2>
+    </div>
+
+    <div class="menu-wrap">
+
+      <button id="editorMenuBtn"
+              class="menu-btn"
+              aria-label="Open menu"
+              aria-expanded="false">
+        <svg viewBox="0 0 24 24">
+          <circle cx="5" cy="12" r="1"/>
+          <circle cx="12" cy="12" r="1"/>
+          <circle cx="19" cy="12" r="1"/>
+        </svg>
+      </button>
+
+      <nav id="editorMenu" class="menu" hidden>
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+
+    </div>
+
+  </div>
+
+
+  <div class="preview-wrap">
+    <div class="card prev" id="prev">
+      <img id="pv" alt="Image preview">
+      <small id="cap"></small>
+    </div>
+    <button id="swap" class="swap-btn" type="button">Change</button>
+  </div>
+
+
+  <div class="fields">
+
+    <div class="fld w" id="fw">
+      <span>Width (px)</span>
+      <b id="vw"></b>
+    </div>
+
+    <button id="lk"
+            aria-pressed="true"
+            aria-label="Lock aspect ratio">
+
+      <svg viewBox="0 0 24 24">
+        <rect x="5" y="11" width="14" height="9" rx="2"/>
+        <path class="c"
+              d="M8 11V8a4 4 0 018 0v3"/>
+        <path class="o"
+              d="M8 11V8a4 4 0 017.5-2"/>
+      </svg>
+
+    </button>
+
+    <div class="fld h" id="fh">
+      <span>Height (px)</span>
+      <b id="vh"></b>
+    </div>
+
+  </div>
+
+
+  <div class="info">
+    <span id="il">Output size</span>
+    <b id="iv">—</b>
+  </div>
+
+
+  <div class="pad" id="pad"></div>
+
+
+  <div id="res" hidden>
+
+    <div class="fm" id="fm">
+      <button data-f="image/jpeg" class="on">JPG</button>
+      <button data-f="image/png">PNG</button>
+      <button data-f="image/webp">WEBP</button>
+    </div>
+
+    <div class="ac">
+
+      <a id="dl" class="btn">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 4v11M8 11l4 4 4-4M5 20h14"/>
+        </svg>
+        Download
+      </a>
+
+      <button id="sh" class="btn alt" hidden>
+        <svg viewBox="0 0 24 24">
+          <path d="M12 15V3M8 7l4-4 4 4M5 12v8h14v-8"/>
+        </svg>
+        Share
+      </button>
+
+    </div>
+
+    <div class="ad-slot" aria-label="Advertisement"><script>atOptions = {'key' : 'e95f3b10572d4b4ab858115b2aa5b2ee','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/e95f3b10572d4b4ab858115b2aa5b2ee/invoke.js"></script></div>
+
+    <div class="sec">
+      <button id="again">Resize again</button>
+      <button id="new">Upload another</button>
+    </div>
+
+    <p class="hint">
+      If the download doesn't open, press and hold the image and choose Save.
+    </p>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   STATE
+========================= */
+
+const $ = id => document.getElementById(id);
+
+const S = {
+  img:null,
+  ow:0,
+  oh:0,
+  ob:0,
+  src:'',
+  w:'',
+  h:'',
+  on:'w',
+  lock:true,
+  fmt:'image/jpeg',
+  done:false,
+  url:null,
+  blob:null,
+  name:'image'
+};
+
+const MAX = 8000;
+
+const fmtSize = n =>
+  n >= 1048576
+    ? (n/1048576).toFixed(2) + ' MB'
+    : Math.round(n/1024) + ' KB';
+
+
+/* =========================
+   MENU
+========================= */
+
+function setupMenu(button,menu){
+
+  button.onclick = e => {
+    e.stopPropagation();
+
+    const opened = !menu.hidden;
+
+    document.querySelectorAll('.menu').forEach(m => {
+      m.hidden = true;
+    });
+
+    document.querySelectorAll('.menu-btn').forEach(b => {
+      b.setAttribute('aria-expanded','false');
+    });
+
+    menu.hidden = opened;
+    button.setAttribute('aria-expanded',String(!opened));
+  };
+}
+
+setupMenu($('homeMenuBtn'),$('homeMenu'));
+setupMenu($('editorMenuBtn'),$('editorMenu'));
+
+document.addEventListener('click',e => {
+
+  if(!e.target.closest('.menu-wrap')){
+
+    document.querySelectorAll('.menu').forEach(m => {
+      m.hidden = true;
+    });
+
+    document.querySelectorAll('.menu-btn').forEach(b => {
+      b.setAttribute('aria-expanded','false');
+    });
+
+  }
+
+});
+
+
+/* =========================
+   KEYPAD
+========================= */
+
+const KEYS = [
+  ['7'],['8'],['9'],
+  ['bs','k s bs','<svg viewBox="0 0 24 24"><path d="M9 5h11v14H9L3 12zM12 9l5 6M17 9l-5 6"/></svg>'],
+
+  ['4'],['5'],['6'],
+  ['clr','k s clr','<svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>'],
+
+  ['1'],['2'],['3'],
+  ['sw','k s sw','<svg viewBox="0 0 24 24"><path d="M4 8h16M16 4l4 4-4 4M20 16H4M8 12l-4 4 4 4"/></svg>'],
+
+  ['0','k z'],
+  ['go','go','Resize']
+];
+
+const LABELS = {
+  bs:'Delete digit',
+  clr:'Clear',
+  sw:'Switch field'
+};
+
+$('pad').innerHTML = KEYS.map(k => `
+  <button
+    class="${k[1]||'k'}"
+    data-k="${k[0]}"
+    ${k[0]==='go'?'id="go" disabled':''}
+    ${LABELS[k[0]]?`aria-label="${LABELS[k[0]]}"`:''}>
+    ${k[2]||k[0]}
+  </button>
+`).join('');
+
+
+/* =========================
+   EXAMPLE IMAGE
+========================= */
+
+(function(){
+
+  const c = document.createElement('canvas');
+
+  c.width = 1280;
+  c.height = 720;
+
+  const x = c.getContext('2d');
+
+  const g = x.createLinearGradient(0,0,1280,720);
+
+  g.addColorStop(0,'#1d4ed8');
+  g.addColorStop(.55,'#7c3aed');
+  g.addColorStop(1,'#ec4899');
+
+  x.fillStyle = g;
+  x.fillRect(0,0,1280,720);
+
+  x.fillStyle = 'rgba(255,255,255,.14)';
+
+  [[1050,170,210],[200,610,170],[760,640,90]]
+    .forEach(a => {
+      x.beginPath();
+      x.arc(a[0],a[1],a[2],0,7);
+      x.fill();
+    });
+
+  x.fillStyle = '#fff';
+  x.font = '800 130px sans-serif';
+  x.textAlign = 'center';
+
+  x.fillText('EXAMPLE',640,360);
+
+  x.font = '600 56px sans-serif';
+
+  x.fillText('1280 × 720 px',640,450);
+
+  S.sample = c.toDataURL('image/jpeg',.9);
+
+  $('exi').src = S.sample;
+
+})();
+
+
+/* =========================
+   OPEN IMAGE
+========================= */
+
+function origCaption(){
+
+  $('cap').textContent =
+    'Original: ' +
+    S.ow +
+    ' × ' +
+    S.oh +
+    ' px' +
+    (S.ob ? ' · ' + fmtSize(S.ob) : '');
+
+}
+
+function openImg(src,name,bytes){
+
+  const i = new Image();
+
+  i.onload = () => {
+
+    tok++;
+
+    S.busy = false;
+
+    Object.assign(S,{
+      img:i,
+      ow:i.naturalWidth,
+      oh:i.naturalHeight,
+      ob:bytes||0,
+      src,
+      name,
+      w:'',
+      h:'',
+      on:'w',
+      lock:true,
+      done:false
+    });
+
+    $('home').hidden = true;
+    $('ed').hidden = false;
+
+    $('vw').dataset.ph = S.ow;
+    $('vh').dataset.ph = S.oh;
+
+    $('pv').src = src;
+
+    origCaption();
+
+    $('prev').classList.remove('res');
+
+    $('res').hidden = true;
+    $('go').hidden = false;
+    $('pad').hidden = false;
+
+    paint();
+
+  };
+
+  i.onerror = () => {
+    alert("Couldn't open this image. Try a JPG, PNG, or WebP file.");
+  };
+
+  i.src = src;
+}
+
+
+/* =========================
+   FILE INPUT
+========================= */
+
+$('f').onchange = e => {
+
+  const f = e.target.files[0];
+
+  if(!f) return;
+
+  openImg(
+    URL.createObjectURL(f),
+    f.name.replace(/\.[^.]+$/,''),
+    f.size
+  );
+
+  e.target.value = '';
+
+};
+
+$('ex').onclick = () =>
+  openImg(S.sample,'example',0);
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+$('bk').onclick = () => {
+
+  $('ed').hidden = true;
+  $('home').hidden = false;
+
+};
+
+$('new').onclick = () => {
+
+  // Open the device's native image picker directly.
+  // On supported mobile browsers this may offer camera,
+  // gallery/photos, and file manager options.
+  $('f').click();
+
+};
+
+$('swap').onclick = () => {
+  $('f').click();
+};
+
+
+/* =========================
+   MEASUREMENTS
+========================= */
+
+function final(){
+
+  let w = +S.w;
+  let h = +S.h;
+
+  if(w && !h)
+    h = S.lock
+      ? Math.round(w*S.oh/S.ow)
+      : S.oh;
+
+  if(h && !w)
+    w = S.lock
+      ? Math.round(h*S.ow/S.oh)
+      : S.ow;
+
+  return (w && h)
+    ? [
+        Math.min(MAX,Math.max(1,w)),
+        Math.min(MAX,Math.max(1,h))
+      ]
+    : null;
+}
+
+
+function sync(){
+
+  if(!S.lock) return;
+
+  const o = S.on === 'w' ? 'h' : 'w';
+  const v = +S[S.on];
+
+  S[o] = v
+    ? String(
+        Math.min(
+          MAX,
+          Math.max(
+            1,
+            Math.round(
+              o === 'h'
+                ? v*S.oh/S.ow
+                : v*S.ow/S.oh
+            )
+          )
+        )
+      )
+    : '';
+
+}
+
+
+function paint(){
+
+  $('vw').textContent = S.w;
+  $('vh').textContent = S.h;
+
+  $('fw').classList.toggle('on',S.on === 'w');
+  $('fh').classList.toggle('on',S.on === 'h');
+
+  $('lk').setAttribute('aria-pressed',S.lock);
+
+  const f = final();
+
+  if(!S.done){
+
+    $('il').textContent = 'Output size';
+
+    $('iv').textContent =
+      f
+        ? f[0] + ' × ' + f[1] + ' px'
+        : '—';
+
+  }
+
+  if(!S.busy){
+
+    $('go').textContent = 'Resize';
+    $('go').disabled = !f;
+
+  }
+
+}
+
+
+/* =========================
+   REOPEN
+========================= */
+
+function reopen(){
+
+  tok++;
+
+  S.busy = false;
+  S.done = false;
+
+  $('res').hidden = true;
+  $('go').hidden = false;
+  $('pad').hidden = false;
+
+  $('prev').classList.remove('res');
+
+  $('pv').src = S.src;
+
+  origCaption();
+
+  paint();
+
+}
+
+$('again').onclick = reopen;
+
+
+/* =========================
+   FIELDS
+========================= */
+
+$('fw').onclick = () => {
+  S.on = 'w';
+  paint();
+};
+
+$('fh').onclick = () => {
+  S.on = 'h';
+  paint();
+};
+
+$('lk').onclick = () => {
+
+  S.lock = !S.lock;
+
+  sync();
+  paint();
+
+};
+
+
+/* =========================
+   KEYPAD INPUT
+========================= */
+
+$('pad').onclick = e => {
+
+  const b = e.target.closest('button');
+
+  if(!b) return;
+
+  const k = b.dataset.k;
+
+  if(S.busy) return;
+
+  if(k === 'go'){
+    run();
+    return;
+  }
+
+  if(k === 'sw'){
+
+    S.on = S.on === 'w' ? 'h' : 'w';
+
+    paint();
+
+    return;
+  }
+
+  if(k === 'bs'){
+
+    S[S.on] =
+      S[S.on].slice(0,-1);
+
+    sync();
+
+  }
+
+  else if(k === 'clr'){
+
+    S.w = '';
+    S.h = '';
+
+  }
+
+  else{
+
+    let n = S[S.on] + k;
+
+    if(/^0/.test(n)) return;
+
+    if(n.length > 4 || +n > MAX)
+      n = String(MAX);
+
+    S[S.on] = n;
+
+    sync();
+
+  }
+
+  paint();
+
+};
+
+
+/* =========================
+   RESULT
+========================= */
+
+let tok = 0;
+
+
+function build(first){
+
+  const f = final();
+
+  if(!f) return;
+
+  const [w,h] = f;
+  const type = S.fmt;
+  const my = ++tok;
+
+  $('dl').classList.add('off');
+
+  const c = document.createElement('canvas');
+
+  c.width = w;
+  c.height = h;
+
+  const x = c.getContext('2d');
+
+  if(type === 'image/jpeg'){
+
+    x.fillStyle = '#fff';
+    x.fillRect(0,0,w,h);
+
+  }
+
+  x.imageSmoothingQuality = 'high';
+
+  x.drawImage(
+    S.img,
+    0,
+    0,
+    w,
+    h
+  );
+
+
+  const fail = () => {
+
+    S.busy = false;
+
+    paint();
+
+    alert(
+      "Couldn't create the image. Try a smaller size."
+    );
+
+  };
+
+
+  c.toBlob(b => {
+
+    if(my !== tok) return;
+
+    if(!b) return fail();
+
+    const url = URL.createObjectURL(b);
+    const im = new Image();
+
+    im.onload = () => {
+
+      if(my !== tok){
+
+        URL.revokeObjectURL(url);
+
+        return;
+      }
+
+      if(S.url)
+        URL.revokeObjectURL(S.url);
+
+      S.blob = b;
+      S.url = url;
+
+      const ext =
+        type === 'image/png'
+          ? 'png'
+          : type === 'image/webp'
+            ? 'webp'
+            : 'jpg';
+
+      $('pv').src = url;
+
+      $('prev').classList.add('res');
+
+      $('cap').textContent =
+        'Result: ' +
+        w +
+        ' × ' +
+        h +
+        ' px · ' +
+        fmtSize(b.size);
+
+      $('il').textContent = 'New size';
+
+      $('iv').textContent =
+        w +
+        ' × ' +
+        h +
+        ' px · ' +
+        fmtSize(b.size);
+
+      $('dl').href = url;
+
+      $('dl').download =
+        S.name +
+        '-' +
+        w +
+        'x' +
+        h +
+        '.' +
+        ext;
+
+      const t =
+        new File(
+          [b],
+          'a.' + ext,
+          {type}
+        );
+
+      $('sh').hidden = !(
+        navigator.share &&
+        (
+          (navigator.canShare && navigator.canShare({files:[t]})) ||
+          !navigator.canShare
+        )
+      );
+
+      $('dl').classList.remove('off');
+
+      if(first){
+
+        S.done = true;
+        S.busy = false;
+
+        $('pad').hidden = true;
+        $('res').hidden = false;
+
+      }
+
+    };
+
+    im.onerror = fail;
+
+    im.src = url;
+
+  },type,.9);
+
+}
+
+
+function run(){
+
+  if(!final() || S.busy) return;
+
+  S.busy = true;
+
+  $('go').disabled = true;
+  $('go').textContent = 'Resizing…';
+
+  build(true);
+
+}
+
+
+/* =========================
+   FORMAT
+========================= */
+
+$('fm').onclick = e => {
+
+  const b =
+    e.target.closest('button');
+
+  if(!b) return;
+
+  S.fmt = b.dataset.f;
+
+  [...$('fm').children]
+    .forEach(x =>
+      x.classList.toggle(
+        'on',
+        x === b
+      )
+    );
+
+  build();
+
+};
+
+
+/* =========================
+   SHARE
+========================= */
+
+$('sh').onclick = async () => {
+
+  if(!S.blob) return;
+
+  const file = new File(
+    [S.blob],
+    $('dl').download,
+    {type:S.blob.type}
+  );
+
+  try{
+
+    if(
+      navigator.share &&
+      navigator.canShare &&
+      navigator.canShare({files:[file]})
+    ){
+
+      await navigator.share({
+        files:[file],
+        title:'Image Size'
+      });
+
+      return;
+    }
+
+    if(navigator.share){
+
+      await navigator.share({
+        title:'Image Size',
+        text:'Resized image with Image Size',
+        url:location.href
+      });
+
+      return;
+    }
+
+  }catch(err){
+
+    if(err && err.name === 'AbortError') return;
+
+  }
+
+  const a = document.createElement('a');
+  a.href = S.url;
+  a.download = $('dl').download;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+};
+
+</script>
+<footer class="site-footer">
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="contact.html">Contact</a>
+</footer>
+
+</body>
+</html>
